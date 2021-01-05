@@ -7,15 +7,22 @@
 <!-- BEGIN TOC -->
 
 - [handlers](#handlers)
-  - [artify.js](#srchandlersartifyjs)
-  - [change-separator.js](#srchandlerschange-separatorjs)
+  - [cheat-button.js](#srchandlerscheat-buttonjs)
+  - [get-newQuestion.js](#srchandlersget-newQuestionjs)
+  - [show-answers.js](#srchandlersshow-answersjs)
+  - [start-button.js](#srchandlersstart-buttonjs)
+- [init](#init)
+  - [index.js](#srcinitindexjs)
 - [listeners](#listeners)
-  - [change-separator.js](#srclistenerschange-separatorjs)
-  - [inputting.js](#srclistenersinputtingjs)
+  - [cheat-button.js](#srclistenerscheat-buttonjs)
+  - [get-newQuestion.js](#srclistenersget-newQuestionjs)
+  - [show-answers.js](#srclistenersshow-answersjs)
+  - [start-button.js](#srclistenersstart-buttonjs)
 - [logic](#logic)
-  - [reverse.js](#srclogicreversejs)
+  - [get-CurrentQuestion.js](#srclogicget-CurrentQuestionjs)
+  - [get-answer.js](#srclogicget-answerjs)
+- [views](#views)
 - [data.js](#srcdatajs)
-- [init.js](#srcinitjs)
 
 <!-- END TOC -->
 
@@ -35,31 +42,31 @@ Handler function define user interactions. They will:
 
 ---
 
-### [./src/handlers/artify.js](./src/handlers/artify.js?study)
-
-<a name="artifyHandler"></a>
-
-## artifyHandler
-
-creates a mirror-image rendering of the user input and displays the growing artwork
-
-| Param | Type               | Description                                                |
-| ----- | ------------------ | ---------------------------------------------------------- |
-| event | <code>Event</code> | triggered whenever a user releases a key in the input area |
+### [./src/handlers/cheat-button.js](./src/handlers/cheat-button.js?study)
 
 ---
 
-### [./src/handlers/change-separator.js](./src/handlers/change-separator.js?study)
+### [./src/handlers/get-newQuestion.js](./src/handlers/get-newQuestion.js?study)
 
-<a name="changeSeparatorHandler"></a>
+---
 
-## changeSeparatorHandler
+### [./src/handlers/show-answers.js](./src/handlers/show-answers.js?study)
 
-changes the program's separator value
+---
 
-| Param | Type               | Description                                                 |
-| ----- | ------------------ | ----------------------------------------------------------- |
-| event | <code>Event</code> | triggered whenever a user types in the separator input area |
+### [./src/handlers/start-button.js](./src/handlers/start-button.js?study)
+
+[TOP](#DOCS)
+
+---
+
+---
+
+# init
+
+---
+
+### [./src/init/index.js](./src/init/index.js?study)
 
 [TOP](#DOCS)
 
@@ -75,25 +82,19 @@ You can use the same handler in many different listeners, or add more than one l
 
 ---
 
-### [./src/listeners/change-separator.js](./src/listeners/change-separator.js?study)
-
-<a name="change separator
-calls handler that changes the mirror-arts separator"></a>
-
-## change separator
-
-calls handler that changes the mirror-arts separator
+### [./src/listeners/cheat-button.js](./src/listeners/cheat-button.js?study)
 
 ---
 
-### [./src/listeners/inputting.js](./src/listeners/inputting.js?study)
+### [./src/listeners/get-newQuestion.js](./src/listeners/get-newQuestion.js?study)
 
-<a name="user input
-calls the reverseHandler when a user types in the input field"></a>
+---
 
-## user input
+### [./src/listeners/show-answers.js](./src/listeners/show-answers.js?study)
 
-calls the reverseHandler when a user types in the input field
+---
+
+### [./src/listeners/start-button.js](./src/listeners/start-button.js?study)
 
 [TOP](#DOCS)
 
@@ -111,24 +112,48 @@ Logic functions will _never_ ...
 - write to the DOM
 - use events
 - use prompt/alert/confirm
-- use variables that are not parameters
-- use variables that are not declared locally
+- use data that is not passed as a parameter
 
 ---
 
-### [./src/logic/reverse.js](./src/logic/reverse.js?study)
+### [./src/logic/get-CurrentQuestion.js](./src/logic/get-CurrentQuestion.js?study)
 
-<a name="reverseLogic"></a>
+---
 
-## reverseLogic ⇒ <code>string</code>
+### [./src/logic/get-answer.js](./src/logic/get-answer.js?study)
 
-reverses a string
+<a name="getAnswer"></a>
 
-**Returns**: <code>string</code> - the string reversed
+## getAnswer(correctAnswer, answerArray) ⇒ <code>number</code>
 
-| Param | Type                | Description         |
-| ----- | ------------------- | ------------------- |
-| input | <code>string</code> | a string to reverse |
+returns one random incorrect answers from the answers array
+
+**Returns**: <code>number</code> - an index of incorrect answer
+
+| Param         | Type                              | Description                                 |
+| ------------- | --------------------------------- | ------------------------------------------- |
+| correctAnswer | <code>number</code>               | correct answer of the current question      |
+| answerArray   | <code>Array.&lt;string&gt;</code> | an array of answers to the current question |
+
+[TOP](#DOCS)
+
+---
+
+---
+
+# Views
+
+View functions are pure functions used to render JS data into DOM elements. They take primitives, objects or arrays as arguments and they return primitives, objects or arrays. Handlers will use view functions to render program state and update the UI.
+
+VIEW functions will _never_ ...
+
+- read from the DOM
+  - they will create _new_ DOM elements
+- write to the DOM
+  - they return a DOM element that the handler will append
+- use events
+- use prompt/alert/confirm
+- use data that is not passed as a parameter
 
 [TOP](#DOCS)
 
@@ -138,20 +163,8 @@ reverses a string
 
 ## [./src/data.js](./src/data.js?study)
 
-<a name="data"></a>
+<a name="quizData"></a>
 
-## data
-
-data that is saved and used between user interactionss
-
-**Properties**
-
-| Name      | Type                | Description           |
-| --------- | ------------------- | --------------------- |
-| mirrorArt | <code>string</code> | the full user artwork |
-
----
-
-## [./src/init.js](./src/init.js?study)
+## quizData
 
 <!-- END DOCS -->
