@@ -1,26 +1,38 @@
-function cheatHandler() {
+'use strict';
+const log = [];
 
-  const userInput = confirm('Do you want to cheat? One of the incorrect answers will be shown');
+let tes = document.createElement('a');
+let questionCounter = 0;
+let availableQuesions = quizData.questions;
+let currentQuestion = {};
+const question = document.querySelector('#question');
+const aEl = document.getElementById('learn');
+const button = document.querySelectorAll('.btn');
+const finishTheGame = document.querySelector('.main-section');
+const finishTheGameSecond = document.querySelector('.modify');
 
-  if (!userInput) {
-      return false;
-  };
+function getNewQuestion() {
+    informUser.innerHTML = ``;
+    button.forEach(btn => {
+        btn.removeAttribute("disabled");
+        btn.classList.remove('correct');
+        btn.classList.remove('incorrect');
+    });
 
-  const questionArticle = document.getElementsByClassName("question")[0];
-  const questionParagraph = questionArticle.querySelector('p');
+    if (availableQuesions.length <= questionCounter) {
+        finishTheGame.innerHTML = ``;
+        finishTheGameSecond.innerHTML = `THANK YOU - YOU HAVE COMPLETED THIS QUIZ! `;
+        finishTheGameSecond.classList.add('text', 'center');
+        return;
+    }
+    currentQuestion = availableQuesions[questionCounter];
+    questionCounter++;
+    question.innerText = currentQuestion.text;
+    button.forEach(button => {
+        const number = button.dataset["number"];
+        button.innerHTML = currentQuestion.answers[number];
+        aEl.href = currentQuestion.resource;
 
-  const questionIndex = getCurrentQuestionIndex(questionParagraph.innerText, quizData.questions);
-
-  const res = getAnswer(quizData.questions[questionIndex].correctAnswer, quizData.questions[questionIndex].answers);
-
-  const answerArticle = document.getElementsByClassName("answers")[0];
-  const answersArray = [...answerArticle.querySelectorAll('button')];
-  const incorrectButton = answersArray.find(item => item.dataset.number == res);
-
-  if (incorrectButton !== undefined) {
-      answersArray.forEach(btn => btn.classList.remove('incorrect'));
-      incorrectButton.classList.add('incorrect');
-
-  }
-
-}
+        aEl.target = '_blank';
+    });
+};

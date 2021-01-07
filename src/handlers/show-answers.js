@@ -1,7 +1,5 @@
 'use strict';
 
-
-
 const scoreBoard = document.querySelector('#score');
 const informUser = document.querySelector('#userInfo');
 let score = 0;

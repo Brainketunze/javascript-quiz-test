@@ -1,5 +1,3 @@
-'use strict';
-
 function cheatHandler() {
 
   const userInput = confirm('Do you want to cheat? One of the incorrect answers will be shown');

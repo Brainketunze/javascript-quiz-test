@@ -21,7 +21,7 @@
 /**
  *
  */
-const quizData = {
+ const quizData = {
  // how many questions has the user answered?
   //  you can calculate this value by iterating through the questions
   //  is selected === -1?
